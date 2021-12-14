@@ -16,4 +16,5 @@ This coding challenge is written using PHP and lightweight REST slim framework h
 
 ## How to run
 Step 1. Clone this code repository. <br/>
-Step 2. Run $composer install <br/> To add dependencies in your application. 
+Step 2. Run $composer install <br/> To add dependencies in your application. <br/>
+Step 3. Run $composer require unsplash/unsplash  To add unsplash library.
