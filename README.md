@@ -9,7 +9,8 @@ This coding challenge is written using PHP and lightweight REST slim framework h
 
 ## Prerequisites
 1. LAMP (Linux, Apache, MySQL, PHP) stacks has been installed in your environment. <br/>
-   Place this code in the DOCUMENT_ROOT of your web server.
+   Place this code in the DOCUMENT_ROOT of your web server. <br/>
+   <b>PHP 7.3 above, enable php-mbstring, enable php-xml</b>
 2. Composer is installed in your environment. <br/>
    Refer to: https://getcomposer.org/download/
 
