@@ -6,6 +6,7 @@
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
+use Slim\HttpCache\Cache;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -27,8 +28,20 @@ Unsplash\HttpClient::init([
     'utmSource' => 'Medibank API Challenge'
 ]);
 
+/*****************************************************************/
+//Add per spec: For the duration of 1 hour return the same JSON content
+// Register service provider with the container
+
+/*****************************************************************/
+
 // Instantiate App
 $app = AppFactory::create();
+
+// Register the http cache middleware.
+$app->add(new Cache('public', 3600));
+
+// Create the cache provider.
+$cacheProvider = new \Slim\HttpCache\CacheProvider();
 
 // Add error middleware
 $app->addErrorMiddleware(true, true, true);
@@ -39,7 +52,7 @@ $app->get('/', function (Request $request, Response $response) {
     return $response;
 });
 
-$app->get('/api/article', function (Request $request, Response $response, $args) {
+$app->get('/api/article', function (Request $request, Response $response, $args) use ($cacheProvider): Response {
     //Get Splash Image 
     $usplashApiResult = Unsplash\Search::photos(SPLASH_KEYWORD, SPLASH_PAGE, SPLASH_PER_PAGE, SPLASH_ORIENTATION);
 
@@ -55,7 +68,9 @@ $app->get('/api/article', function (Request $request, Response $response, $args)
                                              "imageUrl" => $usplashApiResult[$index]["urls"]["full"]));
         $index++;
     }
-    $response->getBody()->write( json_encode($arrResponseResult) );
+    header_remove("Cache-Control");
+    $response = $response->withHeader('Cache-Control', 'public, max-stale=3600')->withJson($arrResponseResult);
+    $response = $cacheProvider->withEtag($response, 'medicache');
     return $response;
 });
 
