@@ -18,6 +18,8 @@ This coding challenge is written using PHP and lightweight REST slim framework h
 Step 1. Clone this code repository. <br/>
 Step 2. Run $<b>composer install</b> <br/> To add dependencies in your application. <br/>
 Step 3. Run $<b>composer require unsplash/unsplash</b> <br/> To add unsplash library. <br/>
+Step 4. Run $<b> composer require slim/http-cache</b> <br/> To install http-cache : composer require slim/http-cache <br/>
+<em>[ec2-user@ip-172-31-30-99 medibank_api_challenge]$ composer require slim/http-cache</em>
 
 ## Public Access
 This project is being hosted publicly until 31 Dec 21 in Amazon Cloud (Linux). <br/>
