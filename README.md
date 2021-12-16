@@ -24,3 +24,34 @@ Step 4. Run $<b> composer require slim/http-cache</b> <br/> To install http-cach
 ## Public Access
 This project is being hosted publicly until 31 Dec 21 in Amazon Cloud (Linux). <br/>
 To access per challenge requirement: http://ec2-54-153-153-254.ap-southeast-2.compute.amazonaws.com/api/article
+<br/><br/>
+Alternatively, you can access through (docker container running on port 8000): http://ec2-54-153-153-254.ap-southeast-2.compute.amazonaws.com:8000/api/article <br/>
+Docker hub: https://hub.docker.com/repository/docker/jsusanto/medibank_js_webapi <br/>
+<br/>
+Here is the ```js docker-compose.yml ```
+
+```js
+version: '3'
+
+services:
+  backend:
+    image: 'jsusanto/medibank_js_webapi:latest'
+    environment:
+      UNSPLASH_ACCESS_KEY: 'CUVuiHGTg6_srEup4NaPqfZW-wr7yQvSrDX0FO-BAz4'
+    expose:
+      - '3000'
+  frontend:
+    image: 'medibankdigital/hacker-card-frontend:latest'
+    depends_on:
+      - backend
+    expose:
+      - '3001'
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - frontend
+    ports:
+      - '4000:4000'
+```
