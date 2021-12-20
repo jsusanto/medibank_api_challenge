@@ -22,7 +22,7 @@ Step 4. Run $<b> composer require slim/http-cache</b> <br/> To install http-cach
 <em>[ec2-user@ip-172-31-30-99 medibank_api_challenge]$ composer require slim/http-cache</em>
 
 ## Public Access
-This project is being hosted publicly until 31 Dec 21 in Amazon Cloud (Linux). <br/>
+This project is being hosted publicly until 24 Dec 21 in Amazon Cloud (Linux). <br/>
 To access per challenge requirement: http://ec2-54-153-153-254.ap-southeast-2.compute.amazonaws.com/api/article
 <br/><br/>
 Alternatively, you can access through (docker container running on port 8000): http://ec2-54-153-153-254.ap-southeast-2.compute.amazonaws.com:8000/api/article <br/>
